@@ -1,0 +1,28 @@
+version: 2
+registries:
+  npm-registry-my-registry-com-443-something:
+    type: npm-registry
+    url: https://my.registry.com:443/something
+    username: "${{secrets.NPM_REGISTRY_MY_REGISTRY_COM_443_SOMETHING_USERNAME}}"
+    password: "${{secrets.NPM_REGISTRY_MY_REGISTRY_COM_443_SOMETHING_PASSWORD}}"
+  git-bitbucket-org:
+    type: git
+    url: https://bitbucket.org
+    username: greysteil
+    password: "${{secrets.GIT_BITBUCKET_ORG_PASSWORD}}"
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    timezone: Europe/London
+  open-pull-requests-limit: 10
+  reviewers:
+  - XhmikosR
+  labels:
+  - dependencies
+  - v5
+  versioning-strategy: increase
+  registries:
+  - npm-registry-my-registry-com-443-something
+  - git-bitbucket-org
